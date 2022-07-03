@@ -60,38 +60,41 @@ import config from "./modules/config.js";
      * @param {University} dataUniversity
      */
     const writeResultListUniversity = (dataUniversity) => {
-
-        console.log(dataUniversity);
         resetSectionResultat();
         let sectionResultat = createElementDom('section', document.body, null, [{
             name: 'class',
             value: 'section-resultat'
         }]);
+        let cardSection=null;
+        let divCardSection=null;
+        let h4CardSection=null;
+        let p1CardSection=null;
+        let p2CardSection=null;
+        let aCardSection=null;
         dataUniversity.getSortData().forEach(function (university, index) {
             //university.web_pages = undefined;
 
-            let cardSection = createElementDom('section', sectionResultat);
-            let divCardSection = createElementDom('div', cardSection, null, [{
+            cardSection = createElementDom('section', sectionResultat);
+            divCardSection = createElementDom('div', cardSection, null, [{
                 name: 'class',
                 value: `university${index}`
             }]);
-            let h4CardSection = createElementDom('h4', divCardSection, (index + 1) + ' - ' + university.name);
-            let p1CardSection = createElementDom('div', divCardSection, university.alpha_two_code+' - '+university.country);
-            let p2CardSection = createElementDom('div', divCardSection, 'site internet: ');
-            let aCardSection = createElementDom('a', divCardSection, university.web_pages[0], [{
+            h4CardSection = createElementDom('h4', divCardSection, (index + 1) + ' - ' + university.name);
+            p1CardSection = createElementDom('div', divCardSection, university.alpha_two_code+' - '+university.country);
+            p2CardSection = createElementDom('div', divCardSection, 'site internet: ');
+            aCardSection = createElementDom('a', divCardSection, university.web_pages[0], [{
                 name: 'href',
                 value: university.web_pages[0]
             }, {
                 name: 'target',
                 value: '_blank'
             }]);
-
-
         });
         updateCompteur(dataUniversityFilter)
     }
+
     /**
-     * creation object dans le dom
+     * creation HTMLElement dans le DOM
      * @param {String} elementDomName
      * @param {HTMLElement} parent
      * @param {String} text => Texte que l'on souhaite afficher dans l'elementDom généré
